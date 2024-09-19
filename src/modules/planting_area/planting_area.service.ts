@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { NullableType } from 'src/utils/types/nullable.type';
+import { FindOneOptions, Repository } from 'typeorm';
 import { CreatePlantingAreaDto } from './dto/create-planting_area.dto';
 import { UpdatePlantingAreaDto } from './dto/update-planting_area.dto';
+import { PlantingArea } from './entities/planting_area.entity';
 
 @Injectable()
 export class PlantingAreaService {
-  create(createPlantingAreaDto: CreatePlantingAreaDto) {
-    return 'This action adds a new plantingArea';
-  }
+    constructor(
+        @InjectRepository(PlantingArea)
+        private repository: Repository<PlantingArea>,
+    ) {}
 
-  findAll() {
-    return `This action returns all plantingArea`;
-  }
+    async create(payload: CreatePlantingAreaDto): Promise<PlantingArea> {
+        const { seedId, ruralProducerId, ...rest } = payload;
+        const plantingArea = this.repository.create({
+            ...rest,
+            seed: { id: seedId },
+            ruralProducer: { id: ruralProducerId },
+        });
+        return await this.repository.save(plantingArea);
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} plantingArea`;
-  }
+    async findOne(options: FindOneOptions<PlantingArea>): Promise<NullableType<PlantingArea>> {
+        return await this.repository.findOne(options);
+    }
 
-  update(id: number, updatePlantingAreaDto: UpdatePlantingAreaDto) {
-    return `This action updates a #${id} plantingArea`;
-  }
+    async findAll(): Promise<PlantingArea[]> {
+        return await this.repository.find();
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} plantingArea`;
-  }
+    async findById(id: number): Promise<PlantingArea> {
+        const response = await this.repository.findOne({
+            where: { id },
+            relations: {
+                seed: true,
+                ruralProducer: true,
+            },
+        });
+        if (!response) {
+            throw new NotFoundException('Área de plantio não encontrada');
+        }
+        return response;
+    }
+
+    async update(id: number, payload: UpdatePlantingAreaDto): Promise<PlantingArea> {
+        const plantingArea = await this.findById(id);
+        return await this.repository.save({ ...plantingArea, ...payload });
+    }
+
+    async remove(id: number): Promise<void> {
+        const plantingArea = await this.findById(id);
+        await this.repository.softRemove(plantingArea);
+    }
 }

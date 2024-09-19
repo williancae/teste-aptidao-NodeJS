@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PlantingAreaService } from './planting_area.service';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreatePlantingAreaDto } from './dto/create-planting_area.dto';
 import { UpdatePlantingAreaDto } from './dto/update-planting_area.dto';
+import { PlantingArea } from './entities/planting_area.entity';
+import { PlantingAreaService } from './planting_area.service';
 
+@ApiTags('Planting Area')
 @Controller('planting-area')
 export class PlantingAreaController {
-  constructor(private readonly plantingAreaService: PlantingAreaService) {}
+    constructor(private readonly plantingAreaService: PlantingAreaService) {}
 
-  @Post()
-  create(@Body() createPlantingAreaDto: CreatePlantingAreaDto) {
-    return this.plantingAreaService.create(createPlantingAreaDto);
-  }
+    @Post()
+    async create(@Body() payload: CreatePlantingAreaDto): Promise<PlantingArea> {
+        return this.plantingAreaService.create(payload);
+    }
 
-  @Get()
-  findAll() {
-    return this.plantingAreaService.findAll();
-  }
+    @Get()
+    async findAll(): Promise<PlantingArea[]> {
+        return this.plantingAreaService.findAll();
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.plantingAreaService.findOne(+id);
-  }
+    @Get(':id')
+    async findOne(@Param('id') id: string): Promise<PlantingArea> {
+        return this.plantingAreaService.findById(+id);
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePlantingAreaDto: UpdatePlantingAreaDto) {
-    return this.plantingAreaService.update(+id, updatePlantingAreaDto);
-  }
+    @Patch(':id')
+    async update(@Param('id') id: string, @Body() updatePlantingAreaDto: UpdatePlantingAreaDto): Promise<PlantingArea> {
+        return this.plantingAreaService.update(+id, updatePlantingAreaDto);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.plantingAreaService.remove(+id);
-  }
+    @Delete(':id')
+    async remove(@Param('id') id: string): Promise<void> {
+        return this.plantingAreaService.remove(+id);
+    }
 }

@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { SeedService } from './seed.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Seed } from './entities/seed.entity';
 import { SeedController } from './seed.controller';
+import { SeedService } from './seed.service';
 
 @Module({
-  controllers: [SeedController],
-  providers: [SeedService],
+    imports: [TypeOrmModule.forFeature([Seed])],
+    controllers: [SeedController],
+    providers: [SeedService],
 })
 export class SeedModule {}

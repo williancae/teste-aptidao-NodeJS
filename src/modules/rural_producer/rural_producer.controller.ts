@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { RuralProducerService } from './rural_producer.service';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateRuralProducerDto } from './dto/create-rural_producer.dto';
 import { UpdateRuralProducerDto } from './dto/update-rural_producer.dto';
+import { RuralProducer } from './entities/rural_producer.entity';
+import { RuralProducerService } from './rural_producer.service';
 
+@ApiTags('Rural Producer')
 @Controller('rural-producer')
 export class RuralProducerController {
-  constructor(private readonly ruralProducerService: RuralProducerService) {}
+    constructor(private readonly ruralProducerService: RuralProducerService) {}
 
-  @Post()
-  create(@Body() createRuralProducerDto: CreateRuralProducerDto) {
-    return this.ruralProducerService.create(createRuralProducerDto);
-  }
+    @Post()
+    async create(@Body() payload: CreateRuralProducerDto): Promise<RuralProducer> {
+        return this.ruralProducerService.create(payload);
+    }
 
-  @Get()
-  findAll() {
-    return this.ruralProducerService.findAll();
-  }
+    @Get()
+    async findAll(): Promise<RuralProducer[]> {
+        return this.ruralProducerService.findAll();
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ruralProducerService.findOne(+id);
-  }
+    @Get(':id')
+    async findOne(@Param('id') id: string): Promise<RuralProducer> {
+        return this.ruralProducerService.findById(+id);
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRuralProducerDto: UpdateRuralProducerDto) {
-    return this.ruralProducerService.update(+id, updateRuralProducerDto);
-  }
+    @Patch(':id')
+    async update(
+        @Param('id') id: string,
+        @Body() updateRuralProducerDto: UpdateRuralProducerDto,
+    ): Promise<RuralProducer> {
+        return this.ruralProducerService.update(+id, updateRuralProducerDto);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ruralProducerService.remove(+id);
-  }
+    @Delete(':id')
+    async remove(@Param('id') id: string): Promise<void> {
+        return this.ruralProducerService.remove(+id);
+    }
 }

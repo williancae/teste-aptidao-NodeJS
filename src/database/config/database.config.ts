@@ -36,15 +36,6 @@ class EnvironmentVariablesValidator {
 export default registerAs<DatabaseConfig>('database', () => {
     validateConfig(process.env, EnvironmentVariablesValidator);
 
-    console.log(process.env.DATABASE_TYPE);
-    console.log(process.env.DATABASE_HOST);
-    console.log(process.env.DATABASE_PORT, '>>>>>');
-    console.log(process.env.DATABASE_USER);
-    console.log(process.env.DATABASE_PASSWORD);
-    console.log(process.env.DATABASE_NAME, '<<<<');
-    console.log(process.env.DATABASE_SYNCHRONIZE);
-    console.log(process.env.DATABASE_LOGGING);
-
     return {
         type: process.env.DATABASE_TYPE,
         host: process.env.DATABASE_HOST,
