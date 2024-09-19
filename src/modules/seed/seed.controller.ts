@@ -12,26 +12,26 @@ export class SeedController {
 
     @Post()
     async create(@Body() payload: CreateSeedDto): Promise<Seed> {
-        return this.seedService.create(payload);
+        return await this.seedService.create(payload);
     }
 
     @Get()
     async findAll(): Promise<Seed[]> {
-        return this.seedService.findAll();
+        return await this.seedService.findAll();
     }
 
     @Get(':id')
     async findOne(@Param('id') id: string): Promise<Seed> {
-        return this.seedService.findById(+id);
+        return await this.seedService.findById(+id);
     }
 
     @Patch(':id')
     async update(@Param('id') id: string, @Body() updateSeedDto: UpdateSeedDto): Promise<Seed> {
-        return this.seedService.update(+id, updateSeedDto);
+        return await this.seedService.update(+id, updateSeedDto);
     }
 
     @Delete(':id')
     async remove(@Param('id') id: string): Promise<void> {
-        return this.seedService.remove(+id);
+        return await this.seedService.remove(+id);
     }
 }

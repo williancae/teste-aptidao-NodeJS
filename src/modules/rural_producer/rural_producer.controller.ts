@@ -12,17 +12,17 @@ export class RuralProducerController {
 
     @Post()
     async create(@Body() payload: CreateRuralProducerDto): Promise<RuralProducer> {
-        return this.ruralProducerService.create(payload);
+        return await this.ruralProducerService.create(payload);
     }
 
     @Get()
     async findAll(): Promise<RuralProducer[]> {
-        return this.ruralProducerService.findAll();
+        return await this.ruralProducerService.findAll();
     }
 
     @Get(':id')
     async findOne(@Param('id') id: string): Promise<RuralProducer> {
-        return this.ruralProducerService.findById(+id);
+        return await this.ruralProducerService.findById(+id);
     }
 
     @Patch(':id')
@@ -30,11 +30,11 @@ export class RuralProducerController {
         @Param('id') id: string,
         @Body() updateRuralProducerDto: UpdateRuralProducerDto,
     ): Promise<RuralProducer> {
-        return this.ruralProducerService.update(+id, updateRuralProducerDto);
+        return await this.ruralProducerService.update(+id, updateRuralProducerDto);
     }
 
     @Delete(':id')
     async remove(@Param('id') id: string): Promise<void> {
-        return this.ruralProducerService.remove(+id);
+        return await this.ruralProducerService.remove(+id);
     }
 }

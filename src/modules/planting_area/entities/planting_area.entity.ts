@@ -1,7 +1,7 @@
+import { RuralProducer } from '@modules/rural_producer/entities/rural_producer.entity';
+import { Seed } from '@modules/seed/entities/seed.entity';
+import { BaseEntityHelper } from '@utils//base-entity-helper';
 import { Validate, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { RuralProducer } from 'src/modules/rural_producer/entities/rural_producer.entity';
-import { Seed } from 'src/modules/seed/entities/seed.entity';
-import { BaseEntityHelper } from 'src/utils/base-entity-helper';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @ValidatorConstraint({ name: 'isCultivableAreaValid', async: false })

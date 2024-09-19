@@ -1,5 +1,5 @@
-import { PlantingArea } from 'src/modules/planting_area/entities/planting_area.entity';
-import { BaseEntityHelper } from 'src/utils/base-entity-helper';
+import { PlantingArea } from '@modules/planting_area/entities/planting_area.entity';
+import { BaseEntityHelper } from '@utils//base-entity-helper';
 import { AfterUpdate, Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({

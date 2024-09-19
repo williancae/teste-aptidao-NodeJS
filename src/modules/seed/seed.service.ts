@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NullableType } from 'src/utils/types/nullable.type';
+import { NullableType } from '@utils//types/nullable.type';
 import { FindOneOptions, ILike, Repository } from 'typeorm';
 import { CreateSeedDto } from './dto/create-seed.dto';
 import { UpdateSeedDto } from './dto/update-seed.dto';

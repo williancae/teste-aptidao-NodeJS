@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
+import validateConfig from '@utils//validate-config';
 import { IsInt, IsString, Max, Min } from 'class-validator';
-import validateConfig from 'src/utils/validate-config';
 
 export type AppConfig = {
     nodeEnv: string;

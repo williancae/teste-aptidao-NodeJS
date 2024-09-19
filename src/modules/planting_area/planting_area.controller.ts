@@ -12,26 +12,26 @@ export class PlantingAreaController {
 
     @Post()
     async create(@Body() payload: CreatePlantingAreaDto): Promise<PlantingArea> {
-        return this.plantingAreaService.create(payload);
+        return await this.plantingAreaService.create(payload);
     }
 
     @Get()
     async findAll(): Promise<PlantingArea[]> {
-        return this.plantingAreaService.findAll();
+        return await this.plantingAreaService.findAll();
     }
 
     @Get(':id')
     async findOne(@Param('id') id: string): Promise<PlantingArea> {
-        return this.plantingAreaService.findById(+id);
+        return await this.plantingAreaService.findById(+id);
     }
 
     @Patch(':id')
     async update(@Param('id') id: string, @Body() updatePlantingAreaDto: UpdatePlantingAreaDto): Promise<PlantingArea> {
-        return this.plantingAreaService.update(+id, updatePlantingAreaDto);
+        return await this.plantingAreaService.update(+id, updatePlantingAreaDto);
     }
 
     @Delete(':id')
     async remove(@Param('id') id: string): Promise<void> {
-        return this.plantingAreaService.remove(+id);
+        return await this.plantingAreaService.remove(+id);
     }
 }

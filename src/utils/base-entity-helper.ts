@@ -26,7 +26,7 @@ export class BaseEntityHelper extends BaseEntity {
 
     @Exclude()
     @DeleteDateColumn()
-    deletedAt: Date;
+    deletedAt: Date | null;
 
     __entity?: string;
 

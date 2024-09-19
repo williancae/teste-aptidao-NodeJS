@@ -1,8 +1,8 @@
+import { PlantingAreaService } from '@modules/planting_area/planting_area.service';
+import { RuralProducerService } from '@modules/rural_producer/rural_producer.service';
+import { SeedService } from '@modules/seed/seed.service';
 import { Injectable } from '@nestjs/common';
 import { cpf } from 'cpf-cnpj-validator';
-import { PlantingAreaService } from 'src/modules/planting_area/planting_area.service';
-import { RuralProducerService } from 'src/modules/rural_producer/rural_producer.service';
-import { SeedService } from 'src/modules/seed/seed.service';
 
 @Injectable()
 export class DatabaseSeed {

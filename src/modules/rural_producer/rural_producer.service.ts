@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NullableType } from 'src/utils/types/nullable.type';
+import { NullableType } from '@utils/types/nullable.type';
 import { FindOneOptions, Repository } from 'typeorm';
 import { CreateRuralProducerDto } from './dto/create-rural_producer.dto';
 import { UpdateRuralProducerDto } from './dto/update-rural_producer.dto';

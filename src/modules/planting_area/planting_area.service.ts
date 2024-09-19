@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NullableType } from 'src/utils/types/nullable.type';
+import { NullableType } from '@utils//types/nullable.type';
 import { FindOneOptions, Repository } from 'typeorm';
 import { CreatePlantingAreaDto } from './dto/create-planting_area.dto';
 import { UpdatePlantingAreaDto } from './dto/update-planting_area.dto';
