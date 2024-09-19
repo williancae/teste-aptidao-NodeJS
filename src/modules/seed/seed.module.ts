@@ -8,5 +8,6 @@ import { SeedService } from './seed.service';
     imports: [TypeOrmModule.forFeature([Seed])],
     controllers: [SeedController],
     providers: [SeedService],
+    exports: [SeedService],
 })
 export class SeedModule {}

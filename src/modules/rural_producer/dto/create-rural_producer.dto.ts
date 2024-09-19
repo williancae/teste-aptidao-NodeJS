@@ -1,6 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsString, Validate } from 'class-validator';
+import { IsString, Validate, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { cnpj, cpf } from 'cpf-cnpj-validator';
+
+@ValidatorConstraint({ name: 'isDocumentValid', async: false })
+class IsDocumentValid implements ValidatorConstraintInterface {
+    validate(documentNumber: string) {
+        return cpf.isValid(documentNumber) || cnpj.isValid(documentNumber);
+    }
+
+    defaultMessage() {
+        return 'O documento informado é inválido';
+    }
+}
 
 export class CreateRuralProducerDto {
     @ApiProperty({
@@ -8,8 +20,8 @@ export class CreateRuralProducerDto {
         description: 'Neste campo deve ser informado o número do documento do produtor rural',
     })
     @IsString()
+    @Validate(IsDocumentValid)
     @Transform((value) => {
-        // Remover caracteres não numéricos
         return value.value.replace(/\D/g, '');
     })
     documentNumber: string;

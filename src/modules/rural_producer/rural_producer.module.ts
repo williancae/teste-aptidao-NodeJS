@@ -8,5 +8,6 @@ import { RuralProducerService } from './rural_producer.service';
     imports: [TypeOrmModule.forFeature([RuralProducer])],
     controllers: [RuralProducerController],
     providers: [RuralProducerService],
+    exports: [RuralProducerService],
 })
 export class RuralProducerModule {}

@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import appConfig from './config/app.config';
 import databaseConfig from './database/config/database.config';
+import { DatabaseSeed } from './database/database-seed';
 import { TypeOrmConfigService } from './database/typeorm-config.service';
 import { PlantingAreaModule } from './modules/planting_area/planting_area.module';
 import { RuralProducerModule } from './modules/rural_producer/rural_producer.module';
@@ -29,6 +30,6 @@ import { SeedModule } from './modules/seed/seed.module';
         SeedModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, DatabaseSeed],
 })
 export class AppModule {}

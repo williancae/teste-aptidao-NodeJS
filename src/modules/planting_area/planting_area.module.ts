@@ -8,5 +8,6 @@ import { PlantingAreaService } from './planting_area.service';
     imports: [TypeOrmModule.forFeature([PlantingArea])],
     controllers: [PlantingAreaController],
     providers: [PlantingAreaService],
+    exports: [PlantingAreaService],
 })
 export class PlantingAreaModule {}
