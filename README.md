@@ -1,73 +1,68 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Teste de Aptidão Node.js com Nest.js
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Requisitos para Execução
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Para executar o projeto, é necessário ter o Docker instalado na máquina. Caso não tenha, siga as instruções de instalação no site oficial: [Instalar Docker](https://docs.docker.com/get-docker/)
 
-## Description
+## Execução
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+O processo de execução do projeto foi automatizado. Basta seguir os passos abaixo:
 
-## Installation
+### Ambiente de Desenvolvimento
+
+Como o projeto está configurado apenas para ambiente de desenvolvimento, utilize o comando abaixo:
+
+**Iniciar a Aplicação**
 
 ```bash
-$ npm install
+  docker-compose up --build
 ```
 
-## Running the app
+Acesse o Swagger emv localhost:3000/docs - [Acesse a documentação](http://localhost:3000/docs)
 
-```bash
-# development
-$ npm run start
+### Assim que acessar a página do Swagger, execute os seguintes passos
 
-# watch mode
-$ npm run start:dev
+Popular Banco de Dados: Execute o endpoint `POST /create-database-seed` para popular a base de dados com dados de teste.
 
-# production mode
-$ npm run start:prod
-```
+## Modelo de Banco de Dados
 
-## Test
+O banco de dados foi estruturado com base nas seguintes entidades principais:
 
-```bash
-# unit tests
-$ npm run test
+1. Produtores Rurais: Tabela que armazena as informações dos produtores rurais.
+2. Áreas de Cultivo: Tabela que armazena as áreas de cultivo vinculadas a um produtor rural.
+3. Sementes: Tabela que armazena as sementes plantadas em cada área de cultivo.
 
-# e2e tests
-$ npm run test:e2e
+Essa estrutura permite que um produtor tenha várias áreas de cultivo, e cada área de cultivo possa ter diferentes sementes associadas.
 
-# test coverage
-$ npm run test:cov
-```
+### Diagrama do Banco de Dados
 
-## Support
+<img src="api-DB.png" alt="Diagrama do Banco de Dados" width="100%"/>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### Objetivo
 
-## Stay in touch
+A divisão em três entidades principais facilita a escalabilidade e manutenção do projeto, permitindo que um produtor possa gerenciar suas áreas de cultivo e sementes de forma independente.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Tecnologias Utilizadas
 
-## License
+As seguintes tecnologias foram usadas no desenvolvimento do projeto:
 
-Nest is [MIT licensed](LICENSE).
+1. Nest.js: Framework robusto para construção de APIs escaláveis em Node.js.
+2. TypeORM: ORM para manipulação de dados com suporte a diferentes bancos de dados, como o PostgreSQL.
+3. Docker: Para containerização e facilidade na execução do projeto em diferentes ambientes.
+4. PostgreSQL: Banco de dados relacional, escolhido pela robustez e escalabilidade.
+
+### Descrição do Desafio
+
+O objetivo do teste é avaliar as habilidades do candidato em lógica de programação, regras de negócio e arquitetura orientada a objetos.
+
+A aplicação permite o cadastro de produtores rurais com os seguintes dados:
+
+1. CPF ou CNPJ
+2. Nome do produtor
+3. Nome da fazenda
+4. Cidade
+5. Estado
+6. Área total da fazenda (hectares)
+7. Área agricultável (hectares)
+8. Área de vegetação (hectares)
+9. Culturas plantadas (ex: Soja, Milho, Algodão, Café, Cana de Açúcar)
